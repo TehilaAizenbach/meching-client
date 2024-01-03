@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    margin: auto;
+    padding: 30px;
+}
+.rightSide{
+    width: 40%;
+    margin: 6px;
+
+}
+

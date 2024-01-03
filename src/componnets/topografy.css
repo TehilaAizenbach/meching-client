@@ -1,0 +1,26 @@
+.text{
+    font-family: 'Masa';
+    font-size: 15px;
+    margin: 3px;
+}
+.redText{
+    color: red;
+}
+.ant-tabs-tab.ant-tabs-tab-active {
+    color: red !important;  /* Change this to your desired active tab text color */
+    /* Add more text-related styles as needed */
+  }
+
+  .ant-tabs-nav .ant-tabs-tab-active {
+    color: 'red';
+ }
+ .title{
+     font-size: 18px;
+ }
+ .points{
+     color: gray;
+     font-size: 20px;
+     /* font-weight: bolder; */
+     padding: 0%;
+ }
+ 
