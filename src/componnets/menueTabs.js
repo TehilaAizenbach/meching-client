@@ -11,15 +11,19 @@ const MenueTab=({classes,students,project})=>{
    const classObject=classes.map((classItem)=>({title:"כיתה "+classItem.class_name,target:classItem.target,points:classItem.points,code:classItem.class_name}))
    const [object,setObject]=useState(null)
    const tabRef=useRef(null)
-   
-
+   const [studentFronted,setStudentFronted]=useState([])
+   const { TabPane } = Tabs;
    const tabsItems=[
       {label:" יעד התיכון ",key:"1", children:<GrafCard item={projectItem}/>},
       {label:" יעד כתתי ",key:"2",children:<TabChildren displayPrecent={false} next={true} object={object} setObject={setObject} items={classObject}></TabChildren>},
-      {label:" יעד אישי ",key:"3",children:<TabChildren displayPrecent={true} next={false} object={object} items={studentObject}></TabChildren>}
+      {label:" יעד אישי ",key:"3",children:<TabChildren displayPrecent={true} next={false} object={object} items={studentObject}></TabChildren>},
+      {label:" בנות מובילות ",key:"4",children:<TabChildren displayPrecent={true} next={false} object={object} items={studentFronted}></TabChildren>}
    ]
-   const { TabPane } = Tabs;
 
+
+   useEffect(()=>{
+      calacFrontedStudent()
+   },[students])
 
    useEffect(()=>{
       switch (activeKey) {
@@ -34,8 +38,39 @@ const MenueTab=({classes,students,project})=>{
    },[object])
    
 
+   const calacFrontedStudent=()=>{
+      const dictionary = students.reduce((acc, currentObj) => {
+         const key = currentObj.group;
+         if (!acc[key]) {
+           acc[key] = [];
+         }
+         acc[key].push(currentObj);
+         return acc;
+       }, {});
+
+      const maxPointsArray=[];
+
+      for (const key in dictionary) {
+         if (dictionary.hasOwnProperty(key)) {
+           // Get the array of objects corresponding to the current key
+           const objectsForKey = dictionary[key];
+           // Find the object with the maximum points for the current key
+           const maxObjectForKey = objectsForKey.reduce((maxObj, currentObj) => {
+             return currentObj.points > maxObj.points ? currentObj : maxObj;
+           }, { points: -Infinity });
+     
+           // Push the object with the maximum points for the current key to the array
+           maxPointsArray.push(maxObjectForKey);
+         }
+       }
+       setStudentFronted(maxPointsArray.map((student)=>({title:student.first_name+" "+student.last_name,target:student.target,points:student.points,text:student.group})))
+
+       console.log(studentFronted);
+
+     
+   }
    const moveTostudentTargetByClass=()=>{
-      console.log(object.code);
+     
       let studentByClass=students.filter(student=>student.group===object?.code);
       setStudentObject(studentByClass.map((student)=>({title:student.first_name+" "+student.last_name,target:student.target,points:student.points})))
       setActiveKey("3");
@@ -44,6 +79,7 @@ const MenueTab=({classes,students,project})=>{
       color: 'red',       // Change this to your desired active tab text color
       // Add more text-related styles as needed
     };
+
    return <Tabs primary type="card" className={customActiveTabStyles} colorPrimaryActive={'red'}   style={customActiveTabStyles} activeKey={activeKey} onChange={async(key) => {
    await setObject(null)
    setActiveKey(key)}} centered={true} >
