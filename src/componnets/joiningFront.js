@@ -10,7 +10,7 @@ import './topografy.css'
 import { Card,Button,Input, Form, Modal } from "antd";
 import './joiningFront.css'
 import CheckModal from "./checkModal";
-const JoiningFront=({students,classObject})=>{
+const JoiningFront=({fetchDataFromAPI,students,classObject})=>{
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [checkClass,setcheckClass]=useState(null)
     const [checkStudent,setcheckStudent]=useState(null)
@@ -51,6 +51,7 @@ const JoiningFront=({students,classObject})=>{
           saveProject( )
             saveStudent()
             let resClasses=await fetchData("classes/addPoints","POST",{points:Number(points),name:checkClass.code})
+            fetchDataFromAPI()
         } catch (error) {
             console.log(error);
         }

@@ -13,33 +13,36 @@ function App() {
   const [project,setProject]=useState({});
 
   useEffect(() => {
-    const fetchDataFromAPI = async () => {
-     
-      try {
-       let data=await fetchData('/project')
-        await setProject(data[0])
-
-         
-       } catch (error) {
-         // Handle errors
-       }
-      try {
-       await setClasses(await fetchData('/classes'))
-      
-        
-      } catch (error) {
-        // Handle errors
-      }
-     
-      try {
-        const result=await fetchData('/students')
-        setStudents(result)
-      } catch (error) {
-        
-      }
-    }
+  
    fetchDataFromAPI()
   },[])
+
+  const fetchDataFromAPI = async () => {
+     
+    try {
+     let data=await fetchData('/project')
+      await setProject(data[0])
+
+       
+     } catch (error) {
+       // Handle errors
+     }
+    try {
+     await setClasses(await fetchData('/classes'))
+    
+      
+    } catch (error) {
+      // Handle errors
+    }
+   
+    try {
+      const result=await fetchData('/students')
+      setStudents(result)
+    } catch (error) {
+      
+    }
+  }
+
     
 
 
@@ -49,7 +52,7 @@ function App() {
       <header className="App-header">
       <img src={stiker} width="100%"></img>
       </header>
-      <HomePage project={project} classes={classes} students={students}></HomePage>
+      <HomePage fetchDataFromAPI={fetchDataFromAPI} project={project} classes={classes} students={students}></HomePage>
       <div style={{width:"90%",margin:"auto"}}>
       <MenueTab project={project}  students={students} classes={classes}></MenueTab>
       </div>
