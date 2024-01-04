@@ -11,11 +11,12 @@ const MenueTab=({classes,students,project})=>{
    const classObject=classes.map((classItem)=>({title:"כיתה "+classItem.class_name,target:classItem.target,points:classItem.points,code:classItem.class_name}))
    const [object,setObject]=useState(null)
    const tabRef=useRef(null)
+   
 
    const tabsItems=[
       {label:" יעד התיכון ",key:"1", children:<GrafCard item={projectItem}/>},
       {label:" יעד כתתי ",key:"2",children:<TabChildren displayPrecent={false} next={true} object={object} setObject={setObject} items={classObject}></TabChildren>},
-      {label:" יעד אישי ",key:"3",children:<TabChildren next={false} object={object} items={studentObject}></TabChildren>}
+      {label:" יעד אישי ",key:"3",children:<TabChildren displayPrecent={true} next={false} object={object} items={studentObject}></TabChildren>}
    ]
    const { TabPane } = Tabs;
 
