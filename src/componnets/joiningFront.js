@@ -1,12 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect } from 'react';
 import GrafCard from "./grafCard";
 import {fetchData} from "../api"
 import './topografy.css'
-
-
-
-
 import { Card,Button,Input, Form, Modal } from "antd";
 import './joiningFront.css'
 import CheckModal from "./checkModal";
@@ -16,6 +12,7 @@ const JoiningFront=({fetchDataFromAPI,students,classObject})=>{
     const [checkStudent,setcheckStudent]=useState(null)
     const [studentsItems,setStudentsItems]=useState([])
     const [points,setPoints]=useState(0)
+    const inputRef=useRef(null);
     const toggleModal = (target) => {
 
         setIsModalOpen(target)
@@ -31,6 +28,7 @@ const JoiningFront=({fetchDataFromAPI,students,classObject})=>{
         if (!isModalOpen) {
             setcheckClass(null);
             setcheckStudent(null);
+            setPoints(0);
         }
       },[isModalOpen])
       useEffect(
@@ -51,11 +49,16 @@ const JoiningFront=({fetchDataFromAPI,students,classObject})=>{
           saveProject( )
             saveStudent()
             let resClasses=await fetchData("classes/addPoints","POST",{points:Number(points),name:checkClass.code})
-            fetchDataFromAPI()
+            await fetchDataFromAPI()
+            window.location.reload();
+            
         } catch (error) {
             console.log(error);
         }
      }
+  
+      
+   
      const saveProject=async()=>{
       let resproject=await fetchData("project/addPoints","POST",{points:Number(points),code:1})
      }
@@ -67,7 +70,8 @@ return (
         <Form >
     <Form.Item>
     <div className="text" style={{border:"1px solid red", display:"flex" ,padding:"10px"}}>
-    <Input type={"number"} style={customStyles} onChange={(e)=>setPoints(e.target.value)}bordered={false} activeBorderColor="red" activeShadow="red"/>
+    <Input ref={inputRef} type={"number"} style={customStyles} onChange={(e)=>
+      setPoints(inputRef.current.input.value)} bordered={false} activeBorderColor="red" activeShadow="red"/>
     <span style={{fontSize:"20px"}}>נקודות</span>
     </div>
     </Form.Item>
@@ -82,7 +86,6 @@ return (
         width={800} 
         open={isModalOpen} 
         footer="">
-            
        {checkClass==null &&
          <CheckModal  title={"בחרי כתה"} checkItem={checkClass} setCheckItem={setcheckClass} items={classObject}></CheckModal>} 
         {checkClass && !checkStudent && <> 
@@ -99,10 +102,10 @@ return (
                 נקודות
               
             </p>
-            <Button onClick={()=>{
-               save()
-
-                 toggleModal(false)}}  type="primary" danger>אישור</Button>
+            <Button onClick={async()=>{
+               await save()
+               toggleModal(false)
+                }}  type="primary" danger>אישור</Button>
          </div>}
    </Modal>
 </Card>)
