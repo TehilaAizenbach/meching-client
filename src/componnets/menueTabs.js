@@ -63,11 +63,13 @@ const MenueTab=({classes,students,project})=>{
              return currentObj.points > maxObj.points ? currentObj : maxObj;
            }, { points: -Infinity });
          
-           if (maxObjectForKey.points>0) {
-            maxPointsArray=[...maxPointsArray,...objectsForKey.filter((student=>(maxPointsArray.push(student.points==maxObjectForKey.points))))] 
+           if (maxObjectForKey["points"]!=0) {
+              console.log(maxObjectForKey.points);
+              console.log(maxObjectForKey);
+               maxPointsArray=[...maxPointsArray,...objectsForKey.filter((student=>(student.points===maxObjectForKey.points)))] 
            }
           
-           console.log(maxPointsArray);
+           
          }
        }
        setStudentFronted(maxPointsArray.map((student)=>({title:student.first_name+" "+student.last_name,target:student.target,points:student.points,text:student.group})))
