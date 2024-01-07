@@ -22,6 +22,10 @@ const MenueTab=({classes,students,project})=>{
 
 
    useEffect(()=>{
+      setStudentObject(students.map((student)=>({title:student.first_name+" "+student.last_name,target:student.target,points:student.points,code:student.id})))
+      console.log(studentObject);
+   },[])
+   useEffect(()=>{
       calacFrontedStudent()
    },[students])
 
@@ -48,7 +52,7 @@ const MenueTab=({classes,students,project})=>{
          return acc;
        }, {});
 
-      const maxPointsArray=[];
+      let  maxPointsArray=[];
 
       for (const key in dictionary) {
          if (dictionary.hasOwnProperty(key)) {
@@ -58,16 +62,15 @@ const MenueTab=({classes,students,project})=>{
            const maxObjectForKey = objectsForKey.reduce((maxObj, currentObj) => {
              return currentObj.points > maxObj.points ? currentObj : maxObj;
            }, { points: -Infinity });
-     
-           // Push the object with the maximum points for the current key to the array
-           maxPointsArray.push(maxObjectForKey);
+         
+           if (maxObjectForKey.points>0) {
+            maxPointsArray=[...maxPointsArray,...objectsForKey.filter((student=>(maxPointsArray.push(student.points==maxObjectForKey.points))))] 
+           }
+          
+           console.log(maxPointsArray);
          }
        }
        setStudentFronted(maxPointsArray.map((student)=>({title:student.first_name+" "+student.last_name,target:student.target,points:student.points,text:student.group})))
-
-       console.log(studentFronted);
-
-     
    }
    const moveTostudentTargetByClass=()=>{
      

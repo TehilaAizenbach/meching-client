@@ -28,7 +28,6 @@ const JoiningFront=({fetchDataFromAPI,students,classObject})=>{
         if (!isModalOpen) {
             setcheckClass(null);
             setcheckStudent(null);
-            setPoints(0);
         }
       },[isModalOpen])
       useEffect(
@@ -50,7 +49,7 @@ const JoiningFront=({fetchDataFromAPI,students,classObject})=>{
             saveStudent()
             let resClasses=await fetchData("classes/addPoints","POST",{points:Number(points),name:checkClass.code})
             await fetchDataFromAPI()
-            window.location.reload();
+            // window.location.reload();
             
         } catch (error) {
             console.log(error);
