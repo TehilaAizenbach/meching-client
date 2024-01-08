@@ -12,7 +12,7 @@ const HomePage =({fetchDataFromAPI,project,classes,students})=>{
     <div className="container">
     <div className="rightSide">
       <Clock deadline={project.finish_Date} startDate={project.startDate}></Clock>
-      <GrafCard item={projectItem}></GrafCard>
+      <GrafCard bonus={true} item={projectItem}></GrafCard>
       </div>
       <JoiningFront fetchDataFromAPI={fetchDataFromAPI} students={students} classObject={classObject}></JoiningFront>
 

@@ -14,7 +14,7 @@ const MenueTab=({classes,students,project})=>{
    const [studentFronted,setStudentFronted]=useState([])
    const { TabPane } = Tabs;
    const tabsItems=[
-      {label:" יעד התיכון ",key:"1", children:<GrafCard item={projectItem}/>},
+      {label:" יעד התיכון ",key:"1", children:<GrafCard bonus={true} item={projectItem}/>},
       {label:" יעד כתתי ",key:"2",children:<TabChildren displayPrecent={true} next={true} object={object} setObject={setObject} items={classObject}></TabChildren>},
       {label:" יעד אישי ",key:"3",children:<TabChildren displayPrecent={true} next={false} object={object} items={studentObject}></TabChildren>},
       {label:" בנות מובילות ",key:"4",children:<TabChildren displayPrecent={true} next={false} object={object} items={studentFronted}></TabChildren>}
