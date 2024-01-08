@@ -18,6 +18,7 @@ const Clock = ({deadline,startDate}) => {
     const minutes =Math.floor(difference/60);
     const seconds = Math.floor(difference);
     const percent=seconds/differenceInSeconds(deadline,startDate)*100;
+    console.log(percent);
       return { percent, hours, minutes, seconds };
     };
     

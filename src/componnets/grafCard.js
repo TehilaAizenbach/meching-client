@@ -12,10 +12,11 @@ useEffect(()=>{
 const calcPrcent=()=>{
     const precent=Number(item.points)/Number(item.target)*100;
     const numberString=precent.toString()
+    console.log(numberString);
     const match = numberString.match(/\.\d{2}/);
     return Math.floor(precent)< precent ? Number(Math.floor(precent)+"."+match[0].substring(1))  : precent;
 }
-return(
+return( 
     <Card className="text" style={{width:"100%", margin:"auto"}}>
        {next && 
        <div onClick={()=>{ setObject(item)}} 
@@ -23,7 +24,10 @@ return(
         ראה 
         <ExportOutlined  style={{margin:"3px"}}/></div>}
         <div className="title">{item.title}</div>
-        <Progress showInfo={displayPrecent} percent={calcPrcent()} status="active" strokeColor={twoColors} />
+        <Progress showInfo={displayPrecent} 
+        format={(percent) => `${percent}%`} 
+        status={calcPrcent() > 100 ? 'active' : 'normal'}
+        percent={calcPrcent()} strokeColor={twoColors} />
         
         {displayPrecent!=false && <div style={{display:"flex"}}>
             <div>
