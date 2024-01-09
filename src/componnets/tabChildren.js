@@ -10,7 +10,7 @@ const TabChildren=({items,setObject,object,next, displayPrecent})=>{
    return(
    <div >
       {object!=null && <GrafCard item={object} ></GrafCard>}
-      <div style={{display:"flex" , flexWrap:'wrap'}}> {items.map((item)=><div style={{width:"30%",}}><GrafCard displayPrecent={displayPrecent} next={next} setObject={setObject} item={item}></GrafCard></div>)
+      <div style={{display:"flex" , flexWrap:'wrap'}}> {items.map((item)=><div style={{width:"30%",}}><GrafCard  displayPrecent={displayPrecent} next={next} setObject={setObject} item={item}></GrafCard></div>)
       }</div>
     </div>)
 }
