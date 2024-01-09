@@ -4,11 +4,12 @@ import {ExportOutlined} from "@ant-design/icons"
 import './topografy.css'
 const GrafCard=({item,setObject,next,displayPrecent,bonus})=>{
 const twoColors = { '0%': 'red', '100%': '#800102' };
+ 
 
 
 useEffect(()=>{
     
-   console.log(bonus);
+   
 },[])
 const colorSuccess= ()=>{return `linear-gradient(90deg, yellow ${precentMore100()-calcPrcent()}%, red ${precentMore100()}%)`;}
 
