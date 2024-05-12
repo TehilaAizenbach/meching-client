@@ -16,9 +16,7 @@ const colorSuccess= ()=>{return `linear-gradient(90deg, yellow ${precentMore100(
 const calcPrcent=()=>{
     const precent=Number(item.points)/Number(item.target)*100;
     const numberString=precent.toString()
-    console.log(numberString);
     const match = numberString.match(/\.\d{2}/);
-    console.log(match);
     // return Math.floor(precent)< precent ? Number(Math.floor(precent)+"."+match[0].substring(1))  : precent;
     return Math.floor(precent)< precent ? Number(Math.floor(precent))  : precent;
 }

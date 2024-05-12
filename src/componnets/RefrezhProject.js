@@ -33,7 +33,6 @@ const handleDate2Change = (date, dateString) => {
 const save=async()=>{
     try {
        let result=await fetchData("/project/update","POST",{project:project})
-       console.log(result);
        await resetProjectPoints(1)
        setIsModalOpen(false)
 
@@ -45,7 +44,6 @@ const save=async()=>{
 
 return(
     <Modal
-    open={isModalOpen[0]}
     onOk={() => toggleModal(false)}
     onCancel={() => toggleModal(false)}
     width={800} 

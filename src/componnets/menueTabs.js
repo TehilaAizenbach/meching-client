@@ -23,7 +23,6 @@ const MenueTab=({classes,students,project})=>{
 
    useEffect(()=>{
       setStudentObject(students.map((student)=>({title:student.first_name+" "+student.last_name,target:student.target,points:student.points,code:student.id})))
-      console.log(studentObject);
    },[])
    useEffect(()=>{
       calacFrontedStudent()
@@ -64,8 +63,6 @@ const MenueTab=({classes,students,project})=>{
            }, { points: -Infinity });
          
            if (maxObjectForKey["points"]!=0) {
-              console.log(maxObjectForKey.points);
-              console.log(maxObjectForKey);
                maxPointsArray=[...maxPointsArray,...objectsForKey.filter((student=>(student.points===maxObjectForKey.points)))] 
            }
           

@@ -4,9 +4,6 @@ import GrafCard from "./grafCard";
 
 
 const TabChildren=({items,setObject,object,next, displayPrecent})=>{
-   useEffect(()=>{
-      console.log(displayPrecent);
-   })
    return(
    <div >
       {object!=null && <GrafCard item={object} ></GrafCard>}

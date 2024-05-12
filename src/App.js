@@ -26,13 +26,8 @@ function App() {
    },[project])
   const resetProjectPoints=async(code)=>{
     try{
-      const students=await fetchData("students/resetPoints","POST",{});
-      console.log(students);
-       const project =await fetchData("/project/resetPoints","POST",{code:code})
-       console.log(project);
-      
-       const classes=await fetchData("/classes/resetPoints","POST",{})
-      
+       const projectresult =await fetchData("/project/resetPoints","POST",{code:code})
+       fetchDataFromAPI()      
     }catch(error){
   console.log(error);
     }
@@ -44,15 +39,10 @@ function App() {
     try {
      let data=await fetchData('/project')
       await setProject(data[0])
-
-       
      } catch (error) {
-       // Handle errors
      }
     try {
      await setClasses(await fetchData('/classes'))
-    
-      
     } catch (error) {
       // Handle errors
     }
